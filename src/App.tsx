@@ -28,6 +28,9 @@ function App() {
                 sunGlareColor: 0x0,
                 sunlightColor: 0x0
             }))
+            wrapper.current?.classList.add('dark')
+        } else {
+            wrapper.current?.classList.remove('dark')
         }
     },[currentWeather])
 
