@@ -63,7 +63,7 @@ export const forecastAPI = {
         })
     },
     getLocation(lat:string | number,lon:string | number){
-        return axios.get(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=c34ca9a3d45a71ed2223cb045ab680fb`).then(data => {
+        return axios.get(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=c34ca9a3d45a71ed2223cb045ab680fb`).then(data => {
             return data.data[0]
         })
     },
