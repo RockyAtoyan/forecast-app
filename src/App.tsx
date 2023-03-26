@@ -20,7 +20,13 @@ function App() {
     useEffect(() => {
         if(vantaEffect && Number(currentWeather?.data.time.toString().slice(11).split(':')[0]) >= 18){
             setVantaEffect(CLOUDS({
-                el: bg.current
+                el: bg.current,
+                skyColor: 0x0,
+                cloudColor: 0x44446f,
+                cloudShadowColor: 0x413e93,
+                sunColor: 0x0,
+                sunGlareColor: 0x0,
+                sunlightColor: 0x0
             }))
         }
     },[currentWeather])
