@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
 import {HourlyForecastItem} from "../../api";
-
+import CloseIcon from '@mui/icons-material/Close';
 
 export const ForecastItem: FC<{ item: { time: string, hours: HourlyForecastItem[] } }> = ({item}) => {
 
@@ -32,7 +32,9 @@ export const ForecastItem: FC<{ item: { time: string, hours: HourlyForecastItem[
                 })}
                 <button onClick={() => {
                     setWatchMode(prevState => !prevState)
-                }}>Close</button>
+                }}>
+                    <CloseIcon />
+                </button>
             </div>
             </div>
         }
