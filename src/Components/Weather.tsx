@@ -34,7 +34,7 @@ export const Weather = React.memo(() => {
     const currentError = useSelector((state:AppStateType) => state.forecast.currentError)
     const forecastFetching = useSelector((state: AppStateType) => state.forecast.forecastFetching)
 
-    const [forecastLocation,setForecastLocation] = useState('')
+    const [forecastLocation,setForecastLocation] = useState<any>('')
 
     useLayoutEffect(() => {
         getPosition((latitude,longitude) => {
@@ -54,18 +54,18 @@ export const Weather = React.memo(() => {
 
 
     useLayoutEffect(() => {
-        setForecastLocation(currentLocation?.local_names.ru ? currentLocation?.local_names.ru : '' )
+        setForecastLocation(currentLocation ? [`${currentLocation.lat}, ${currentLocation.lon}`,currentLocation?.local_names.ru] : '' )
     },[currentLocation])
 
     return <main className={'main'}>
             {forecastFetching && <Preloader />}
             {currentError ? <h2>{currentError}</h2> : <>
                 <CurrentForecast />
-                <input type="text" value={forecastLocation} onChange={(event) => {
+                <input type="text" value={Array.isArray(forecastLocation) ? forecastLocation[1] : forecastLocation} onChange={(event) => {
                     setForecastLocation(event.currentTarget.value)
                 }} />
                 <button onClick={() => {
-                    if(forecastLocation) dispatch(setForecast(forecastLocation))
+                    if(forecastLocation) dispatch(setForecast(forecastLocation[0]))
                     else  dispatch(setForecastAC([],''))
                 }}>
                     <span>Прогноз на 5 дней</span>
