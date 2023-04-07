@@ -80,15 +80,19 @@ type ThunkType = ThunkAction<Promise<void> | void, AppStateType, any, ActionsTyp
 
 export const setForecast = (location:string):ThunkType => dispatch => {
     dispatch(setForecastFetchingAC(true))
-    return forecastAPI.getForecast(location).then(data => {
-        const [forecastItems,location] = [data.timelines.hourly,data.location.name]
-        dispatch(setForecastAC(forecastItems,location))
-        dispatch(setErrorAC(null))
-    }).catch(err => {
-        setError(err,dispatch)
-    }).finally(() => {
-        dispatch(setForecastFetchingAC(false))
+    return forecastAPI.getCityLocation(location).then(locationData => {
+        //debugger
+        return  forecastAPI.getForecast(`${locationData.lat}, ${locationData.lon}`).then(data => {
+            const [forecastItems,location] = [data.timelines.hourly,data.location.name]
+            dispatch(setForecastAC(forecastItems,location))
+            dispatch(setErrorAC(null))
+        }).catch(err => {
+            setError(err,dispatch)
+        }).finally(() => {
+            dispatch(setForecastFetchingAC(false))
+        })
     })
+
 }
 
 export const setCurrentWeather = (location:string):ThunkType => dispatch => {
