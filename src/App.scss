@@ -243,3 +243,11 @@ button{
   justify-content: center;
   color: #fff;
 }
+@media screen and (max-width: 768px) {
+  .forecast_item{
+    flex-direction: column;
+    background: #101241;
+    padding: 10px;
+    border-radius: 10px;
+  }
+}
