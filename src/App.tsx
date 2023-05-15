@@ -18,7 +18,8 @@ function App() {
     const wrapper = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if(vantaEffect && Number(currentWeather?.data.time.toString().slice(11).split(':')[0]) >= 18){
+        console.log(Number(currentWeather?.data.time.toString().slice(11).split(':')[0]))
+        if(vantaEffect && Number(currentWeather?.data.time.toString().slice(11).split(':')[0]) >= 16){
             setVantaEffect(CLOUDS({
                 el: bg.current,
                 skyColor: 0x0,

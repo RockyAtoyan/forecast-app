@@ -3,6 +3,7 @@ import {AppStateType} from "./store/store";
 import {AnyAction} from "redux";
 import {useDispatch, useSelector} from "react-redux";
 import {
+    getCityLocation,
     setCurrentLocation,
     setCurrentLocationAC,
     setCurrentWeather,
@@ -65,8 +66,14 @@ export const Weather = React.memo(() => {
                     setForecastLocation(event.currentTarget.value)
                 }} />
                 <button onClick={() => {
-                    if(forecastLocation) dispatch(setForecast(forecastLocation))
-                    else  dispatch(setForecastAC([],''))
+                    if(forecastLocation) {
+                        dispatch(setForecast(forecastLocation))
+                        dispatch(getCityLocation(forecastLocation,({lat,lon}) => {
+                            dispatch(setCurrentLocation(lat,lon))
+                            dispatch(setCurrentWeather(`${lat}, ${lon}`))
+                        }))
+                    }
+                    else dispatch(setForecastAC([],''))
                 }}>
                     <span>Прогноз на 5 дней</span>
                 </button>

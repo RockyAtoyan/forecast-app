@@ -23,7 +23,7 @@ export const CurrentForecast = () => {
                     <span>{currentWeather?.data.values.windSpeed} м/с</span>
                 </h3>
                 {!!currentWeather?.data.values.rainIntensity && <h3>Идет дождь</h3>}
-                {!!currentWeather?.data.values.snowIntensity && <h3>Идет cнег</h3>}
+                {!!currentWeather?.data.values.snowIntensity && <h3>Идет снег</h3>}
             </div>
         </>}
     </div>

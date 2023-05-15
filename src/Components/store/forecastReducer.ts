@@ -1,8 +1,7 @@
 import {CurrentWeather, forecastAPI, HourlyForecastItem} from "../../api";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./store";
-import {Simulate} from "react-dom/test-utils";
-import error = Simulate.error;
+
 
 const InitState = {
     forecastItems:[] as HourlyForecastItem[],
@@ -92,7 +91,10 @@ export const setForecast = (location:string):ThunkType => dispatch => {
             dispatch(setForecastFetchingAC(false))
         })
     })
+}
 
+export const getCityLocation = (city:string,callback:(...args:any) => any):ThunkType => dispatch => {
+    return forecastAPI.getCityLocation(city).then(callback)
 }
 
 export const setCurrentWeather = (location:string):ThunkType => dispatch => {
